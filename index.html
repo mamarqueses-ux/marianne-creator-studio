@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0c0c0c">
+  <title>Marianne — Creator Partnerships</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: "Manrope", sans-serif;
+      background: #0c0c0c;
+      color: #d7e2ea;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: clip;
+      background: #0c0c0c;
+    }
+
+    .hero {
+      position: relative;
+      isolation: isolate;
+      display: flex;
+      min-height: 100vh;
+      min-height: 100svh;
+      flex-direction: column;
+      overflow: hidden;
+      padding: 24px clamp(24px, 5vw, 72px) 32px;
+    }
+
+    .hero::before,
+    .hero::after {
+      position: absolute;
+      z-index: -1;
+      top: 50%;
+      left: 50%;
+      width: min(76vw, 760px);
+      aspect-ratio: 1;
+      border: 1px solid rgba(215, 226, 234, 0.08);
+      border-radius: 50%;
+      content: "";
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+    }
+
+    .hero::after {
+      width: min(58vw, 580px);
+      border-color: rgba(215, 226, 234, 0.06);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      animation: fade-down 700ms cubic-bezier(0.25, 0.1, 0.25, 1) both;
+    }
+
+    .brand {
+      color: #d7e2ea;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .nav-label {
+      color: rgba(215, 226, 234, 0.64);
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-align: right;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 200ms ease;
+    }
+
+    .nav-label:hover,
+    .scroll-cue:hover {
+      color: #fff;
+    }
+
+    .nav-contact:hover {
+      color: #fff;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(20px, 4vw, 48px);
+    }
+
+    .hero-main {
+      position: relative;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 5vh 0 7vh;
+    }
+
+    .hero-portrait-wrap {
+      position: relative;
+      z-index: 0;
+      width: clamp(320px, 50vw, 620px);
+      margin: clamp(12px, 2vh, 20px) 0;
+      pointer-events: none;
+      animation: portrait-float 6s ease-in-out infinite;
+    }
+
+    .hero-portrait-wrap::before {
+      position: absolute;
+      z-index: -1;
+      inset: 14%;
+      border-radius: 50%;
+      background: rgba(149, 83, 190, 0.2);
+      content: "";
+      filter: blur(55px);
+    }
+
+    .hero-portrait {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 28px 50px rgba(0, 0, 0, 0.32));
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: #d7e2ea;
+      font-size: clamp(0.8rem, 1.2vw, 0.95rem);
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-align: center;
+      text-transform: uppercase;
+      animation: fade-up 800ms 100ms cubic-bezier(0.25, 0.1, 0.25, 1) both;
+    }
+
+    h1 {
+      width: 100%;
+      margin: 0;
+      font-family: "Manrope", sans-serif;
+      background: linear-gradient(180deg, #f1f4f8 0%, #aab8ca 100%);
+      background-clip: text;
+      color: transparent;
+      font-size: clamp(3rem, 8.5vw, 8rem);
+      font-weight: 800;
+      letter-spacing: -0.055em;
+      line-height: 1;
+      text-align: center;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fade-up 900ms 180ms cubic-bezier(0.25, 0.1, 0.25, 1) both;
+    }
+
+    .hero-copy {
+      max-width: 620px;
+      width: 100%;
+      margin: clamp(12px, 2vh, 20px) 0 0;
+      color: #d7e2ea;
+      font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+      font-weight: 400;
+      letter-spacing: 0;
+      line-height: 1.65;
+      text-align: center;
+      animation: fade-up 900ms 340ms cubic-bezier(0.25, 0.1, 0.25, 1) both;
+    }
+
+    .hero-bottom {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      animation: fade-up 900ms 500ms cubic-bezier(0.25, 0.1, 0.25, 1) both;
+    }
+
+    .location,
+    .scroll-cue {
+      margin: 0;
+      color: rgba(215, 226, 234, 0.65);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .contact-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 28px;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 999px;
+      background: linear-gradient(123deg, #18011f 7%, #b600a8 42%, #7621b0 72%, #be4c00 100%);
+      box-shadow: 0 4px 16px rgba(181, 1, 167, 0.22), inset 4px 4px 12px rgba(119, 33, 177, 0.7);
+      color: #fff;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: transform 200ms ease, box-shadow 200ms ease;
+    }
+
+    .contact-pill:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(181, 1, 167, 0.32), inset 4px 4px 12px rgba(119, 33, 177, 0.7);
+    }
+
+    .email-link {
+      font-variant: small-caps;
+      letter-spacing: 0.1em;
+      text-transform: none;
+    }
+
+    .contact-pill:focus-visible,
+    .contact-link:focus-visible,
+    .nav-label:focus-visible {
+      outline: 2px solid #d7e2ea;
+      outline-offset: 4px;
+    }
+
+    .about {
+      position: relative;
+      display: grid;
+      min-height: 88vh;
+      min-height: 88svh;
+      place-items: center;
+      overflow: hidden;
+      padding: 100px clamp(24px, 8vw, 120px) 120px;
+      border-top: 1px solid rgba(215, 226, 234, 0.1);
+      background:
+        radial-gradient(ellipse at 50% 45%, rgba(80, 57, 117, 0.2), transparent 55%),
+        #0c0c0c;
+    }
+
+    .about-content {
+      position: relative;
+      width: min(100%, 900px);
+      text-align: center;
+      animation: fade-up 900ms 100ms cubic-bezier(0.25, 0.1, 0.25, 1) both;
+    }
+
+    .about-kicker {
+      margin: 0 0 12px;
+      color: #d7e2ea;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .about h2 {
+      margin: 0;
+      font-family: "Manrope", sans-serif;
+      background: linear-gradient(180deg, #f1f4f8 0%, #aab8ca 100%);
+      background-clip: text;
+      color: transparent;
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .about-copy {
+      max-width: 760px;
+      margin: clamp(28px, 5vh, 48px) auto 0;
+      color: #e1e6ec;
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      font-weight: 400;
+      letter-spacing: 0;
+      line-height: 1.8;
+    }
+
+    .approach-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      max-width: 760px;
+      margin: clamp(36px, 6vh, 52px) auto 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .approach-list li {
+      position: relative;
+      display: flex;
+      min-height: 116px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(215, 226, 234, 0.16);
+      border-radius: 18px;
+      background: linear-gradient(145deg, rgba(215, 226, 234, 0.07), rgba(215, 226, 234, 0.02));
+      transition: border-color 250ms ease, background 250ms ease, box-shadow 250ms ease, translate 250ms ease, scale 250ms ease;
+    }
+
+    .approach-list li::before {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, transparent 25%, rgba(255, 255, 255, 0.12) 50%, transparent 75%);
+      content: "";
+      pointer-events: none;
+      transform: translateX(-110%);
+      transition: transform 650ms cubic-bezier(0.2, 0.7, 0.3, 1);
+    }
+
+    .approach-list li > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .approach-list li:hover {
+      translate: 0 -6px;
+      scale: 1.025;
+      border-color: rgba(215, 226, 234, 0.52);
+      background: linear-gradient(145deg, rgba(149, 83, 190, 0.24), rgba(215, 226, 234, 0.04));
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25), 0 0 24px rgba(149, 83, 190, 0.14);
+    }
+
+    .approach-list li:hover::before {
+      transform: translateX(110%);
+    }
+
+    .approach-number {
+      color: #bcabcF;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+    }
+
+    .approach-list strong {
+      color: #f1f4f8;
+      font-size: clamp(1.2rem, 1.8vw, 1.4rem);
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .about.has-process-motion:not(.process-visible) .approach-list li {
+      opacity: 0;
+      transform: translateY(24px) scale(0.96);
+    }
+
+    .about.process-visible .approach-list li {
+      animation: approach-reveal 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    }
+
+    .about.process-visible .approach-list li:nth-child(2) {
+      animation-delay: 120ms;
+    }
+
+    .about.process-visible .approach-list li:nth-child(3) {
+      animation-delay: 240ms;
+    }
+
+    @keyframes approach-reveal {
+      from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .contact {
+      position: relative;
+      display: grid;
+      min-height: 72vh;
+      min-height: 72svh;
+      place-items: center;
+      padding: 100px clamp(24px, 8vw, 120px);
+      border-top: 1px solid rgba(215, 226, 234, 0.1);
+      background:
+        radial-gradient(ellipse at 50% 65%, rgba(116, 33, 150, 0.2), transparent 55%),
+        #0c0c0c;
+      text-align: center;
+    }
+
+    .contact-content {
+      width: min(100%, 760px);
+    }
+
+    .contact-kicker {
+      margin: 0 0 12px;
+      color: rgba(215, 226, 234, 0.72);
+      font-size: 0.85rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .contact h2 {
+      margin: 0;
+      font-family: "Manrope", sans-serif;
+      background: linear-gradient(180deg, #f1f4f8 0%, #aab8ca 100%);
+      background-clip: text;
+      color: transparent;
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 800;
+      letter-spacing: -0.055em;
+      line-height: 1.1;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .contact-copy {
+      max-width: 600px;
+      margin: 24px auto 0;
+      color: #d7e2ea;
+      font-size: clamp(1rem, 1.6vw, 1.2rem);
+      line-height: 1.7;
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 36px;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 20px;
+      border: 1px solid rgba(215, 226, 234, 0.35);
+      border-radius: 999px;
+      color: #d7e2ea;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: background-color 200ms ease, border-color 200ms ease;
+    }
+
+    .contact-link:hover {
+      border-color: rgba(215, 226, 234, 0.7);
+      background: rgba(215, 226, 234, 0.08);
+    }
+
+    .contact-footer {
+      margin: 64px 0 0;
+      color: rgba(215, 226, 234, 0.48);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    @keyframes fade-up {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fade-down {
+      from {
+        opacity: 0;
+        transform: translateY(-18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes portrait-float {
+      0%,
+      100% {
+        translate: 0 0;
+      }
+      50% {
+        translate: 0 -12px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero {
+        padding-top: 20px;
+        padding-bottom: 24px;
+      }
+
+      .hero-main {
+        padding: 7vh 0;
+      }
+
+      .hero-portrait-wrap {
+        width: clamp(220px, 58vw, 300px);
+      }
+
+      .hero-copy {
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      .hero-bottom {
+        align-items: center;
+      }
+
+      .location,
+      .scroll-cue {
+        max-width: 92px;
+        font-size: 0.58rem;
+      }
+
+      .contact-pill {
+        padding: 11px 18px;
+        font-size: 0.68rem;
+      }
+
+      .about {
+        min-height: 80vh;
+        min-height: 80svh;
+        padding-top: 80px;
+        padding-bottom: 88px;
+      }
+
+      .approach-list {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .approach-list li {
+        min-height: 90px;
+      }
+
+      .contact {
+        min-height: 68vh;
+        min-height: 68svh;
+        padding-top: 80px;
+        padding-bottom: 80px;
+      }
+
+      .contact-actions {
+        flex-direction: column;
+      }
+
+      .contact-actions > * {
+        width: min(100%, 300px);
+      }
+
+      .contact-footer {
+        margin-top: 48px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+
+      .hero-portrait-wrap {
+        animation: none;
+      }
+
+      .approach-list li,
+      .approach-list li::before {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="hero" id="hero">
+    <header class="nav">
+      <a class="brand" href="#hero">Creator Studio</a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a class="nav-label" href="#about">About</a>
+        <a class="nav-label" href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero-main" aria-labelledby="hero-title">
+      <p class="eyebrow">Influencer marketing</p>
+      <div class="hero-portrait-wrap">
+        <svg class="hero-portrait" viewBox="0 0 760 460" role="img" aria-labelledby="creator-art-title creator-art-description" xmlns="http://www.w3.org/2000/svg">
+          <title id="creator-art-title">Creator marketing icons</title>
+          <desc id="creator-art-description">A colorful megaphone surrounded by a magnifying glass, light bulb, video, message, like, and heart icons. No people are shown.</desc>
+          <defs>
+            <linearGradient id="creator-horn" x1="258" y1="172" x2="502" y2="300" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#F2EBD9"/>
+              <stop offset="1" stop-color="#BCE9DD"/>
+            </linearGradient>
+            <linearGradient id="creator-rim" x1="468" y1="158" x2="535" y2="316" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#24C5D0"/>
+              <stop offset="1" stop-color="#1389AB"/>
+            </linearGradient>
+          </defs>
+
+          <g opacity=".55" fill="none" stroke="#D7E2EA" stroke-dasharray="6 9" stroke-linecap="round">
+            <circle cx="125" cy="97" r="52" stroke-width="2"/>
+            <circle cx="125" cy="97" r="42" stroke-width="1.5"/>
+            <circle cx="136" cy="283" r="59" stroke-width="2"/>
+            <circle cx="136" cy="283" r="48" stroke-width="1.5"/>
+            <circle cx="652" cy="112" r="44" stroke-width="2"/>
+          </g>
+
+          <g transform="rotate(-14 122 95)">
+            <circle cx="121" cy="91" r="31" fill="#252436" stroke="#32C7D1" stroke-width="7"/>
+            <circle cx="121" cy="91" r="20" fill="#0C0C0C"/>
+            <path d="m143 114 28 31" fill="none" stroke="#32C7D1" stroke-linecap="round" stroke-width="12"/>
+            <path d="m143 114 28 31" fill="none" stroke="#252436" stroke-linecap="round" stroke-width="5"/>
+          </g>
+
+          <g>
+            <path d="M112 259c0-19 13-36 32-43v54c0 9-7 16-16 16h-1c-9 0-15-8-15-17v-10Z" fill="#F4D96B"/>
+            <path d="M112 258c0-23 18-42 40-42s40 19 40 42c0 16-8 29-20 37-6 4-9 10-9 16h-23c0-6-4-12-9-16-12-8-19-21-19-37Z" fill="#E8E485"/>
+            <path d="M139 313h26v12c0 8-6 14-13 14s-13-6-13-14v-12Z" fill="#32C7D1"/>
+            <path d="M139 320h26m-26 8h26" stroke="#252436" stroke-linecap="round" stroke-width="4"/>
+            <path d="M152 206v-14m-52 37-12-10m119 10 12-10" stroke="#F4D96B" stroke-linecap="round" stroke-width="4"/>
+          </g>
+
+          <g transform="rotate(-9 332 83)">
+            <rect x="297" y="43" width="73" height="87" rx="12" fill="#28253A" stroke="#9472D8" stroke-width="4"/>
+            <rect x="306" y="53" width="55" height="66" rx="7" fill="#171522"/>
+            <path d="M316 68h34m-34 14h28m-28 14h34" stroke="#D7E2EA" stroke-linecap="round" stroke-opacity=".75" stroke-width="4"/>
+            <path d="m366 35 13-8 45 80-13 8-45-80Z" fill="#F4C85E"/>
+            <path d="m366 35 7-4 45 80-7 4-45-80Z" fill="#31BACB"/>
+            <path d="m411 115 13-8 3 19-12-11Z" fill="#F0B395"/>
+          </g>
+
+          <path d="m261 193 204-68c15-5 29 6 29 22v143c0 16-15 27-30 22l-203-69v-50Z" fill="url(#creator-horn)" stroke="#252436" stroke-linejoin="round" stroke-width="8"/>
+          <path d="m253 194 43-14v104l-43-13v-77Z" fill="#252436"/>
+          <path d="m261 198 30-10v27l-30 10v-27Zm0 47 30 10v25l-30-10v-25Z" fill="#25C3D0"/>
+          <path d="m472 125 39 13c18 6 29 22 29 41v80c0 20-13 37-31 42l-37 12V125Z" fill="url(#creator-rim)"/>
+          <path d="M510 145c15 6 23 19 23 35v78c0 16-8 29-23 37" fill="none" stroke="#086E88" stroke-linecap="round" stroke-width="6"/>
+          <path d="m339 285 50 17-1 50c0 12-10 19-22 15l-19-7c-8-3-13-11-12-20l4-55Z" fill="#28253A" stroke="#15131D" stroke-linejoin="round" stroke-width="5"/>
+          <path d="m352 297 23 8-1 34-21-7-1-35Z" fill="#31BACB"/>
+
+          <path d="M550 151c15-10 24-7 33 0m-29 17c15-9 23-6 32 0m-26 18c13-7 20-4 27 1" fill="none" stroke="#F2EBD9" stroke-linecap="round" stroke-width="4"/>
+
+          <g transform="rotate(8 633 89)">
+            <path d="M601 55h62c11 0 20 9 20 20v16c0 11-9 20-20 20h-21l-18 15v-15h-23c-11 0-20-9-20-20V75c0-11 9-20 20-20Z" fill="#E97643"/>
+            <path d="M613 76h37m-37 12h27" stroke="#FFF1DA" stroke-linecap="round" stroke-width="3"/>
+          </g>
+
+          <g transform="rotate(10 645 207)">
+            <path d="M647 176c-14-18-39-5-30 15 5 10 24 24 32 30 8-7 28-23 32-34 6-19-19-29-34-11Z" fill="#F4F0E8"/>
+            <path d="M627 187c-8-10-21-4-17 7 3 7 16 17 23 22 5-5 14-12 18-18 5-9-8-16-16-8l-4 4-4-7Z" fill="#E45B72"/>
+          </g>
+
+          <g transform="rotate(-7 664 282)">
+            <rect x="632" y="245" width="70" height="68" rx="20" fill="#328DDB"/>
+            <path d="M656 289v-23c0-5 7-6 8-2l3 9 12-2c5-1 8 3 6 8l-5 16c-1 3-4 5-7 5h-12c-3 0-5-2-5-5v-6Zm-10-18h7v29h-7z" fill="#FFFFFF"/>
+            <path d="m647 310 9 11 8-9" fill="#328DDB"/>
+          </g>
+
+          <g transform="rotate(7 128 386)">
+            <rect x="91" y="353" width="77" height="58" rx="19" fill="#E97643"/>
+            <path d="m125 368 21 15-21 15v-30Z" fill="#FFF1DA"/>
+            <path d="M107 405v8" stroke="#F4F0E8" stroke-linecap="round" stroke-width="3"/>
+          </g>
+
+          <path d="m229 145 6-14 6 14 14 6-14 6-6 14-6-14-14-6 14-6Zm343 190 5-11 5 11 11 5-11 5-5 11-5-11-11-5 11-5ZM82 183l4-9 4 9 9 4-9 4-4 9-4-9-9-4 9-4Z" fill="#F5CF79"/>
+          <path d="M561 356h48m-24-24v48M208 339h24m-12-12v24" stroke="#32C7D1" stroke-linecap="round" stroke-width="4"/>
+        </svg>
+      </div>
+      <h1 id="hero-title">Hello, I'm Marianne</h1>
+      <p class="hero-copy">I help e-commerce brands find, vet, and connect with the right creators through influencer marketing.</p>
+    </section>
+
+    <footer class="hero-bottom">
+      <p class="location">Thoughtful creator matches</p>
+      <a class="contact-pill" href="#contact">Contact Me</a>
+      <a class="scroll-cue" href="#about">Discover more</a>
+    </footer>
+  </main>
+
+  <section class="about" id="about" aria-labelledby="about-title">
+    <div class="about-content">
+      <p class="about-kicker">Influencer Sourcing &amp; Outreach Specialist</p>
+      <h2 id="about-title">About me</h2>
+      <p class="about-copy">I'm Marianne, an influencer sourcing and outreach specialist with 3+ years of experience helping DTC brands find, vet, and manage creators for paid partnerships. I also handled end-to-end creator operations, from sourcing, outreach, negotiating, shipping, sending briefs, and managing follow-ups to ensure they delivered content on time.</p>
+      <ul class="approach-list" aria-label="My creator partnership process">
+        <li><span class="approach-number">01</span><strong>Find</strong></li>
+        <li><span class="approach-number">02</span><strong>Vet</strong></li>
+        <li><span class="approach-number">03</span><strong>Connect</strong></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="contact" id="contact" aria-labelledby="contact-title">
+    <div class="contact-content">
+      <p class="contact-kicker">Have a creator campaign in mind?</p>
+      <h2 id="contact-title">Let&rsquo;s connect.</h2>
+      <p class="contact-copy">Tell me what you&rsquo;re looking for. I&rsquo;d love to help you find and manage the right creators for your next campaign.</p>
+      <div class="contact-actions">
+        <a class="contact-pill email-link" href="mailto:mamarqueses@gmail.com?subject=Creator%20partnership%20inquiry" aria-label="Email Marianne at mamarqueses@gmail.com">mamarqueses@gmail.com</a>
+        <a class="contact-link" href="https://wa.me/639157769289">WhatsApp: +63 915 776 9289</a>
+      </div>
+      <p class="contact-footer">Pagsanjan, Philippines</p>
+    </div>
+  </section>
+  <script>
+    const aboutSection = document.getElementById("about");
+
+    if (aboutSection && !window.matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {
+      aboutSection.classList.add("has-process-motion");
+      const processObserver = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          aboutSection.classList.add("process-visible");
+          processObserver.disconnect();
+        }
+      }, { threshold: 0.2 });
+
+      processObserver.observe(aboutSection);
+    }
+  </script>
+</body>
+</html>
